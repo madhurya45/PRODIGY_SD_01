@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <script>
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9/5) + 32;
+        }
+
+        function celsiusToKelvin(celsius) {
+            return celsius + 273.15;
+        }
+
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5/9;
+        }
+
+        function fahrenheitToKelvin(fahrenheit) {
+            return (fahrenheit - 32) * 5/9 + 273.15;
+        }
+
+        function kelvinToCelsius(kelvin) {
+            return kelvin - 273.15;
+        }
+
+        function kelvinToFahrenheit(kelvin) {
+            return (kelvin - 273.15) * 9/5 + 32;
+        }
+
+        function convertTemperature() {
+            let value = parseFloat(document.getElementById('temperature').value);
+            let unit = document.getElementById('unit').value.toLowerCase();
+
+            let celsius, fahrenheit, kelvin;
+
+            if (unit === 'c') {
+                celsius = value;
+                fahrenheit = celsiusToFahrenheit(celsius);
+                kelvin = celsiusToKelvin(celsius);
+            } else if (unit === 'f') {
+                fahrenheit = value;
+                celsius = fahrenheitToCelsius(fahrenheit);
+                kelvin = fahrenheitToKelvin(fahrenheit);
+            } else if (unit === 'k') {
+                kelvin = value;
+                celsius = kelvinToCelsius(kelvin);
+                fahrenheit = kelvinToFahrenheit(kelvin);
+            } else {
+                alert("Invalid unit. Please use 'C' for Celsius, 'F' for Fahrenheit, or 'K' for Kelvin.");
+                return;
+            }
+
+            document.getElementById('celsius').textContent = celsius.toFixed(2) + " °C";
+            document.getElementById('fahrenheit').textContent = fahrenheit.toFixed(2) + " °F";
+            document.getElementById('kelvin').textContent = kelvin.toFixed(2) + " K";
+        }
+    </script>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <label for="temperature">Enter temperature:</label>
+    <input type="number" id="temperature" name="temperature">
+    <br>
+    <label for="unit">Enter unit (C, F, K):</label>
+    <input type="text" id="unit" name="unit" maxlength="1">
+    <br>
+    <button onclick="convertTemperature()">Convert</button>
+    <h2>Converted Temperatures:</h2>
+    <p id="celsius">Celsius: N/A</p>
+    <p id="fahrenheit">Fahrenheit: N/A</p>
+    <p id="kelvin">Kelvin: N/A</p>
+</body>
+</html>
